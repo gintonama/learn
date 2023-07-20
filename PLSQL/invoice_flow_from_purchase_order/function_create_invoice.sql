@@ -71,7 +71,7 @@ AS $$
         SELECT nextval('account_move_id_seq') INTO invid;
         SELECT * FROM purchase_order WHERE state = 'purchase' AND id = purchase_id AND invoice_status = 'to invoice' INTO porder;
         SELECT commercial_partner_id FROM res_partner WHERE id = porder.partner_id INTO cpartner_id;
-		
+
         INSERT INTO poinv_temp (
             inv_id, po_id, partner_id, journal_id, due_date, currency_id,
             invoice_user_id, sequence_prefix, name, move_type, invoice_origin, amount_untaxed, amount_tax,
@@ -149,7 +149,7 @@ AS $$
             amount_residual, amount_tax_signed, amount_total_in_currency_signed, amount_residual_signed,
             date, state, payment_state, auto_post, extract_state, create_uid, create_date, write_uid, write_date,
             amount_total_signed, amount_untaxed_signed, partner_shipping_id, commercial_partner_id,
-			invoice_payment_term_id
+            invoice_payment_term_id
         )
         SELECT 
             inv_id, '/', partner_id, 
@@ -167,7 +167,7 @@ AS $$
             amount_untaxed + amount_tax, amount_tax, amount_untaxed + amount_tax, amount_untaxed + amount_tax, 
             due_date::date, 'draft', 'not_paid', 'no', 'no_extract_requested', 1, now(), 1, now(),
             amount_untaxed + amount_tax, amount_untaxed, partner_id, commercial_partner_id,
-			payment_term_id
+            payment_term_id
         FROM poinv_temp it
         JOIN account_payment_term apt ON apt.id = it.payment_term_id
         ON CONFLICT(id)
@@ -252,7 +252,7 @@ AS $$
     BEGIN
         INSERT INTO account_move_purchase_order_rel (purchase_order_id, account_move_id)
         SELECT po_id, inv_id FROM poinv_temp;
-		
-		UPDATE purchase_order SET invoice_count = 1 WHERE id = (SELECT po_id FROM poinv_temp);
+
+        UPDATE purchase_order SET invoice_count = 1 WHERE id = (SELECT po_id FROM poinv_temp);
     END;
 $$;
