@@ -7,7 +7,7 @@ CREATE TABLE payment_tmp(
     journal_id int,
     user_id int,
     currency_id int,
-	account_id int,
+    account_id int,
 
     name varchar,
     sequence_prefix varchar,
@@ -15,7 +15,7 @@ CREATE TABLE payment_tmp(
     payment_state varchar,
     auto_post varchar,
     extract_state varchar,
-	label varchar,
+    label varchar,
 
     amount_untaxed numeric,
     amount_tax numeric,
@@ -55,6 +55,9 @@ AS $$
             default_account_id, 'payment from query'
         FROM account_journal 
         WHERE id = 7;
+
+        PERFORM generate_invoice_bank();
+        PERFORM generate_account_bank_statement();
     END;
 $$;
 
