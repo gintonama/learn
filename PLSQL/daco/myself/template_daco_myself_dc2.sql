@@ -108,21 +108,21 @@ AS $$
                     ) VALUES (
                         nextval('irradiation_machine_id_seq'),
                         data_loop.new_val ->> 'name',
-						(data_loop.new_val ->> 'technology_id')::int,
-						data_loop.new_val ->> 'model',
-						data_loop.new_val ->> 'serial_number',
-						data_loop.new_val ->> 'branch',
-						data_loop.new_val ->> 'id'
+                        (data_loop.new_val ->> 'technology_id')::int,
+                        data_loop.new_val ->> 'model',
+                        data_loop.new_val ->> 'serial_number',
+                        data_loop.new_val ->> 'branch',
+                        data_loop.new_val ->> 'id'
                     );
                 END IF;
-			ELSEIF data_loop.operation = 'UPDATE' THEN
-				UPDATE irradiation_machine SET 
-					name = data_loop.new_val ->> 'name',
-					technology_id = (data_loop.new_val ->> 'technology_id')::int,
-					model = data_loop.new_val ->> 'model',
-					serial_number = data_loop.new_val ->> 'serial_number',
-					branch = data_loop.new_val ->> 'branch'
-				WHERE daco_id = data_loop.old_val ->> 'id';
+            ELSEIF data_loop.operation = 'UPDATE' THEN
+                UPDATE irradiation_machine SET 
+                    name = data_loop.new_val ->> 'name',
+                    technology_id = (data_loop.new_val ->> 'technology_id')::int,
+                    model = data_loop.new_val ->> 'model',
+                    serial_number = data_loop.new_val ->> 'serial_number',
+                    branch = data_loop.new_val ->> 'branch'
+                WHERE daco_id = data_loop.old_val ->> 'id';
             ELSEIF data_loop.operation = 'DELETE' THEN
                 -- delete process when operation is delete
                 DELETE FROM irradiation_machine WHERE daco_id = data_loop.old_val ->> 'id';
