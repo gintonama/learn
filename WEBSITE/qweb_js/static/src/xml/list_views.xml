@@ -3,7 +3,6 @@
 <templates>
     <t t-extend="ExpensesListView.buttons" t-name="QwebJS.buttons">
         <t t-jquery="button.o_button_create_report" t-operation="after">
-            <span>wkwkwk</span>
             <button type="button" t-att-class="'btn btn-secondary'">
                 New Button
             </button>
