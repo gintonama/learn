@@ -2,8 +2,8 @@ import pysftp, ftplib
 files = []
 cnopts = pysftp.CnOpts()
 cnopts.hostkeys = None
-with pysftp.Connection(host='aeonorange.dev.portcities.cc', username='pciuser', password='DpqvyIJv', port=22, cnopts=cnopts) as sftp:
-# with pysftp.Connection(host='127.0.0.1', username='mfit_avas', password='keamanan', port=None, cnopts=cnopts) as sftp:
+# with pysftp.Connection(host='aeonorange.dev.portcities.cc', username='pciuser', password='DpqvyIJv', port=22, cnopts=cnopts) as sftp:
+with pysftp.Connection(host='127.0.0.1', username='mfit_avas', password='keamanan', port=None, cnopts=cnopts) as sftp:
 # with pysftp.Connection(host='18.179.249.177', username='usmh', private_key='/opt/inforex/usmh.sftp.key', private_key_pass='Uds!wMph', port=22, cnopts=cnopts) as sftp:
     # print (sftp.listdir())
     # with sftp.cd('/tmp/ec_files'):
